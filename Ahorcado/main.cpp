@@ -131,11 +131,20 @@ int main()
 	char comenzar;
 	int opcion = 0, opcionJugar = 0, vidas = 6, posi = 0, puntaje = 0;
 
-	string peliculas[7];
+	string peliculas[7] = {"STARWARS", "TITANIC", "AVENGERS", "JOHNWICK", "SUPERMAN", "POKEMON", "TRANSFORMERS"};
+	string instruccionesPeliculas[7] = {"Esta pelicula se da en muchas galaxias y con peleas de sable laser.", "Es una pelicula basada en la historia de un barco que se hundio.",
+	"Es acerca de la union de los superheroes de marvel.", "Este mercenario es bien pagado y sin duda amaba a su perrito.", "Este superheroe es de los mas grandes de DC Comics.", "Es una pelicula basada en un juego rpg de nintendo."
+	, "Estos alienigenas vienen de una galaxia muy lejana y son fanaticos de los carros."};
 
 	string deportes[7] = {"BARCELONA", "FRANCIA", "MIROSLAVKLOSE", "NATACION", "MICHAELPHELPS", "TAEKWONDO", "INGLATERRA"};
 	string instruccionesDeportes[7] = {"Es considerado uno de los mejores equipos del mundo.", "Equipo nacional que gano el mundial del 2018.", "Maximo goleador de la historia de los mundiales.", "Es el deporte mas completo que existe.",
 	"Jugador olimpico con mas medallas olimpicas de la historia.", "Arte marcial que se considera deporte olimpico.", "Pais nativo del deporte de futbol."};
+
+	string cienciasSociales[7] = {"CIENCIAPOITICA", "ANTROPOLOGIA", "ECONOMIA", "HISTORIA", "EDUCACION", "GEOGRAFIA", "SOCIOLOGIA"};
+	string instruccionesCS[7] = {"Estudia la teoría y práctica de la política, los sistemas y comportamientos políticos en la sociedad.", "Estudia al ser humano de una forma integral",
+	"La forma o medios de satisfacer las necesidades humanas mediante recursos limitados.", "Ciencia que tiene como objeto el estudio de sucesos del pasado",
+	"Conjunto de disciplinas interesadas en el estudio científico de los distintos aspectos de la educación en sociedades y culturas determinadas.", "Se encarga de estudiar las sociedades humanas desde una perspectiva espacial.",
+	"Se encarga del análisis científico de la estructura y funcionamiento de la sociedad humana o población regional."};
 
 	string palabra, instrucciones, nombre;
 
@@ -171,7 +180,53 @@ int main()
 			switch (opcionJugar)
 			{
 			case 1:
+				posi = (rand() % 6);
+				palabra = peliculas[posi];
+				instrucciones = instruccionesPeliculas[posi];
 				eligioOpcion = true;
+
+				cout << "Comenzar(S/N): ";
+				cin >> comenzar;
+				switch (comenzar)
+				{
+				case 'S':
+					comenzarPartida = true;
+					break;
+
+				case 'N':
+					comenzarPartida = false;
+					break;
+
+				default:
+					comenzarPartida = false;
+					break;
+				}
+
+				if (comenzarPartida == true)
+				{
+					puntaje = jugar(vidas, palabra, instrucciones, posi);
+					if (puntaje > palabra.length() * 2 || puntaje == 50)
+					{
+						cout << "HAS GANADO LA PARTIDA, LA PALABRA ES " + palabra;
+					}
+					else
+					{
+						cout << "Has perdido la partida :(";
+					}
+				}
+				cout << "\nEjemplo: AAA, AJR, JED, OJM";
+				cout << "\nIngrese su nombre en el formato mostrado: ";
+				cin >> nombre;
+
+				for (int i = 0; i < 10; i++)
+				{
+					if (jugadores[i] == "")
+					{
+						jugadores[i] = nombre;
+						puntajes[i] = puntaje;
+					}
+				}
+				eligioOpcion = false;
 				break;
 
 			case 2:
@@ -221,11 +276,57 @@ int main()
 						puntajes[i] = puntaje;
 					}
 				}
-				
+				eligioOpcion = false;
 				break;
 
 			case 3:
+				posi = (rand() % 6);
+				palabra = cienciasSociales[posi];
+				instrucciones = instruccionesCS[posi];
 				eligioOpcion = true;
+
+				cout << "Comenzar(S/N): ";
+				cin >> comenzar;
+				switch (comenzar)
+				{
+				case 'S':
+					comenzarPartida = true;
+					break;
+
+				case 'N':
+					comenzarPartida = false;
+					break;
+
+				default:
+					comenzarPartida = false;
+					break;
+				}
+
+				if (comenzarPartida == true)
+				{
+					puntaje = jugar(vidas, palabra, instrucciones, posi);
+					if (puntaje > palabra.length() * 2 || puntaje == 50)
+					{
+						cout << "HAS GANADO LA PARTIDA, LA PALABRA ES " + palabra;
+					}
+					else
+					{
+						cout << "Has perdido la partida :(";
+					}
+				}
+				cout << "\nEjemplo: AAA, AJR, JED, OJM";
+				cout << "\nIngrese su nombre en el formato mostrado: ";
+				cin >> nombre;
+
+				for (int i = 0; i < 10; i++)
+				{
+					if (jugadores[i] == "")
+					{
+						jugadores[i] = nombre;
+						puntajes[i] = puntaje;
+					}
+				}
+				eligioOpcion = false;
 				break;
 
 			default:
